@@ -17,12 +17,14 @@ export const Dashboards = () => {
             localStorage.setItem('Dashboards', JSON.stringify(dashboardContext.dashboards));
           }
         }
-        const savedDashboards = JSON.parse(localStorage.getItem('Dashboards') || '')
-        if (savedDashboards.length > 1 && dashboardContext.dashboards.length < 1) {
-          dashboardContext.setDashboards(savedDashboards)
+        if (localStorage.getItem('Dashboards') !== null && dashboardContext.dashboards.length < 1) {
+          const savedDashboards = JSON.parse(localStorage.getItem('Dashboards') || '')
+          if (savedDashboards.length > 1 ) {
+            dashboardContext.setDashboards(savedDashboards)
+          }
         } else {
           fetchDashboards()
-        } 
+        }
       }, [])
 
     return(
